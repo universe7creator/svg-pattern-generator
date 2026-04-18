@@ -1,0 +1,14 @@
+{
+  "name": "SVG Pattern Generator",
+  "slug": "svg-pattern-generator",
+  "description": "Generate beautiful SVG background patterns for your web projects instantly",
+  "price": "$19",
+  "status": "ready",
+  "checkout_url": null,
+  "lemon_checkout_url": null,
+  "vercel_url": null,
+  "github_url": null,
+  "deployment_url": null,
+  "created_at": "2026-04-18T18:42:00Z",
+  "updated_at": "2026-04-18T18:42:00Z"
+}

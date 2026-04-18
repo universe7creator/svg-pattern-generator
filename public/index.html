@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Pattern Generator - Beautiful Background Patterns</title>
+  <meta name="description" content="Generate beautiful SVG background patterns for your web projects instantly. Dots, lines, waves, and geometric patterns.">
+  <meta property="og:title" content="SVG Pattern Generator">
+  <meta property="og:description" content="Generate beautiful SVG background patterns instantly">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .pattern-card {
+      transition: all 0.3s ease;
+    }
+    .pattern-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    }
+    .glow-button {
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+      transition: all 0.3s ease;
+    }
+    .glow-button:hover {
+      box-shadow: 0 0 30px rgba(102, 126, 234, 0.7);
+      transform: translateY(-2px);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float { animation: float 3s ease-in-out infinite; }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="shapes" class="w-8 h-8 text-purple-400"></i>
+          <span class="text-xl font-bold">SVG Pattern Generator</span>
+        </div>
+        <a href="#pricing" class="glow-button bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-full font-semibold">
+          Get Pro
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="float mb-6">
+        <i data-lucide="sparkles" class="w-16 h-16 text-purple-400 mx-auto pulse-glow"></i>
+      </div>
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
+        <span class="gradient-text">Beautiful SVG Patterns</span>
+      </h1>
+      <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+        Generate stunning SVG background patterns for your web projects.
+        Dots, lines, waves, and geometric designs — instantly.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#generator" class="glow-button bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-full font-bold text-lg">
+          Try Generator
+        </a>
+        <a href="#pricing" class="glass px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition">
+          Get Pro $19
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Generator -->
+  <section id="generator" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <span class="gradient-text">Live Pattern Generator</span>
+      </h2>
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Controls -->
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-xl font-semibold mb-6 flex items-center gap-2">
+            <i data-lucide="sliders-horizontal" class="w-5 h-5 text-purple-400"></i>
+            Pattern Settings
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Pattern Type</label>
+              <select id="patternType" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                <option value="dots">Dots</option>
+                <option value="lines">Lines</option>
+                <option value="waves">Waves</option>
+                <option value="grid">Grid</option>
+                <option value="zigzag">Zigzag</option>
+                <option value="hexagons">Hexagons</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Primary Color</label>
+              <input type="color" id="color1" value="#667eea" class="w-full h-10 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Secondary Color</label>
+              <input type="color" id="color2" value="#764ba2" class="w-full h-10 rounded-lg cursor-pointer">
+            </div>
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Size: <span id="sizeValue">40</span>px</label>
+              <input type="range" id="size" min="10" max="100" value="40" class="w-full accent-purple-500">
+            </div>
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Opacity: <span id="opacityValue">30</span>%</label>
+              <input type="range" id="opacity" min="10" max="100" value="30" class="w-full accent-purple-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="lg:col-span-2 glass rounded-2xl p-6">
+          <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+            <i data-lucide="eye" class="w-5 h-5 text-purple-400"></i>
+            Preview
+          </h3>
+          <div id="preview" class="bg-white rounded-xl h-80 flex items-center justify-center overflow-hidden">
+            <!-- Pattern will be rendered here -->
+          </div>
+          <div class="flex gap-4 mt-4">
+            <button onclick="copySVG()" class="flex-1 glass py-3 rounded-lg font-medium hover:bg-white/10 transition flex items-center justify-center gap-2">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              Copy SVG
+            </button>
+            <button onclick="downloadSVG()" class="flex-1 glow-button bg-gradient-to-r from-purple-500 to-pink-500 py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Types -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4">
+        <span class="gradient-text">Pattern Types</span>
+      </h2>
+      <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+        Choose from 6 unique pattern styles. Each fully customizable with your brand colors.
+      </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-dots">
+            <!-- Dots preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Dots</h3>
+          <p class="text-gray-400 text-sm">Classic polka dot pattern, perfect for playful designs</p>
+        </div>
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-lines">
+            <!-- Lines preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Lines</h3>
+          <p class="text-gray-400 text-sm">Clean diagonal lines for minimal, professional look</p>
+        </div>
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-waves">
+            <!-- Waves preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Waves</h3>
+          <p class="text-gray-400 text-sm">Smooth flowing waves for organic, calming aesthetics</p>
+        </div>
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-grid">
+            <!-- Grid preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Grid</h3>
+          <p class="text-gray-400 text-sm">Precise grid pattern for technical, structured designs</p>
+        </div>
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-zigzag">
+            <!-- Zigzag preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Zigzag</h3>
+          <p class="text-gray-400 text-sm">Dynamic zigzag pattern for energetic, bold designs</p>
+        </div>
+        <div class="pattern-card glass rounded-xl p-6">
+          <div class="h-32 bg-white/10 rounded-lg mb-4 flex items-center justify-center" id="preview-hexagons">
+            <!-- Hexagons preview -->
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Hexagons</h3>
+          <p class="text-gray-400 text-sm">Geometric honeycomb pattern for modern, tech feel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <span class="gradient-text">Why SVG Patterns?</span>
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center p-6">
+          <div class="w-14 h-14 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="zap" class="w-7 h-7 text-purple-400"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Lightning Fast</h3>
+          <p class="text-gray-400 text-sm">SVG patterns load instantly, no heavy images</p>
+        </div>
+        <div class="text-center p-6">
+          <div class="w-14 h-14 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="maximize" class="w-7 h-7 text-pink-400"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Infinitely Scalable</h3>
+          <p class="text-gray-400 text-sm">Crystal clear at any resolution or screen size</p>
+        </div>
+        <div class="text-center p-6">
+          <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="feather" class="w-7 h-7 text-blue-400"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Tiny File Size</h3>
+          <p class="text-gray-400 text-sm">Under 1KB per pattern vs 50KB+ for images</p>
+        </div>
+        <div class="text-center p-6">
+          <div class="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="code" class="w-7 h-7 text-green-400"></i>
+          </div>
+          <h3 class="font-semibold mb-2">Easy to Edit</h3>
+          <p class="text-gray-400 text-sm">Modify colors and sizes with simple code changes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <span class="gradient-text">Simple Pricing</span>
+      </h2>
+      <div class="glass rounded-2xl p-8 max-w-md mx-auto text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+        <h3 class="text-2xl font-bold mb-2">Pro License</h3>
+        <div class="text-5xl font-extrabold mb-4">
+          <span class="gradient-text">$19</span>
+        </div>
+        <p class="text-gray-400 mb-6">One-time payment, lifetime access</p>
+        <ul class="space-y-3 mb-8 text-left">
+          <li class="flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            <span>6 pattern types</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            <span>Unlimited generations</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            <span>Commercial use license</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            <span>Priority support</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+            <span>Lifetime updates</span>
+          </li>
+        </ul>
+        <a href="https://profitbridge.lemonsqueezy.com/checkout/buy/svg-pattern-generator-pro" class="glow-button bg-gradient-to-r from-purple-500 to-pink-500 w-full py-4 rounded-full font-bold text-lg block">
+          Get Pro Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="gradient-text">FAQ</span>
+        </h2>
+        <div class="space-y-4">
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-semibold mb-2 flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400"></i>
+              What file format are the patterns?
+            </h3>
+            <p class="text-gray-400">All patterns are generated as SVG (Scalable Vector Graphics) format, which means they scale perfectly to any size without losing quality.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-semibold mb-2 flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400"></i>
+              Can I use these commercially?
+            </h3>
+            <p class="text-gray-400">Yes! The Pro license includes commercial use rights. Use patterns in client projects, products, or anything you build.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-semibold mb-2 flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400"></i>
+              Do I need design skills?
+            </h3>
+            <p class="text-gray-400">Not at all! Just pick a pattern type, choose your colors, and adjust the settings. The generator handles everything automatically.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-semibold mb-2 flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400"></i>
+              What's included in the Pro version?
+            </h3>
+            <p class="text-gray-400">Pro gives you access to all 6 pattern types, unlimited generations, SVG download, and lifetime updates with a one-time payment.</p>
+          </div>
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-semibold mb-2 flex items-center gap-2">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400"></i>
+              Can I edit the generated SVG?
+            </h3>
+            <p class="text-gray-400">Absolutely! SVG is just code. You can open it in any text editor, design tool like Figma, or directly modify it in your CSS/HTML.</p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-4 border-t border-white/10">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="shapes" class="w-6 h-6 text-purple-400"></i>
+          <span class="font-semibold">SVG Pattern Generator</span>
+        </div>
+        <p class="text-gray-400 text-sm">&copy; 2026 SVG Pattern Generator. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Pattern generation functions
+    function generateDots(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dots" x="0" y="0" width="${size}" height="${size}" patternUnits="userSpaceOnUse">
+            <circle cx="${size/2}" cy="${size/2}" r="${size/5}" fill="${color1}" fill-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#dots)"/>
+      </svg>`;
+    }
+
+    function generateLines(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="lines" x="0" y="0" width="${size}" height="${size}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="${size}" stroke="${color1}" stroke-width="2" stroke-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#lines)"/>
+      </svg>`;
+    }
+
+    function generateWaves(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      return `<svg width="${size * 2}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="waves" x="0" y="0" width="${size * 2}" height="${size}" patternUnits="userSpaceOnUse">
+            <path d="M0 ${size/2} Q ${size/2} 0 ${size} ${size/2} T ${size*2} ${size/2}"
+                  fill="none" stroke="${color1}" stroke-width="2" stroke-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#waves)"/>
+      </svg>`;
+    }
+
+    function generateGrid(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" x="0" y="0" width="${size}" height="${size}" patternUnits="userSpaceOnUse">
+            <path d="M ${size} 0 L 0 0 0 ${size}" fill="none" stroke="${color1}" stroke-width="1" stroke-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+      </svg>`;
+    }
+
+    function generateZigzag(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="zigzag" x="0" y="0" width="${size}" height="${size}" patternUnits="userSpaceOnUse">
+            <path d="M0 ${size/2} L${size/4} 0 L${size/2} ${size/2} L${size*3/4} ${size} L${size} ${size/2}"
+                  fill="none" stroke="${color1}" stroke-width="2" stroke-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#zigzag)"/>
+      </svg>`;
+    }
+
+    function generateHexagons(size, color1, color2, opacity) {
+      const op = opacity / 100;
+      const r = size / 2;
+      return `<svg width="${size}" height="${size * 0.866}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hex" x="0" y="0" width="${size}" height="${size * 0.866}" patternUnits="userSpaceOnUse">
+            <path d="M${size/2} 0 L${size} ${size*0.433} L${size} ${size*0.866} L${size/2} ${size*0.866} L0 ${size*0.433} Z"
+                  fill="none" stroke="${color1}" stroke-width="1" stroke-opacity="${op}"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hex)"/>
+      </svg>`;
+    }
+
+    const generators = {
+      dots: generateDots,
+      lines: generateLines,
+      waves: generateWaves,
+      grid: generateGrid,
+      zigzag: generateZigzag,
+      hexagons: generateHexagons
+    };
+
+    let currentSVG = '';
+
+    function updatePreview() {
+      const type = document.getElementById('patternType').value;
+      const color1 = document.getElementById('color1').value;
+      const color2 = document.getElementById('color2').value;
+      const size = parseInt(document.getElementById('size').value);
+      const opacity = parseInt(document.getElementById('opacity').value);
+
+      currentSVG = generators[type](size, color1, color2, opacity);
+      document.getElementById('preview').innerHTML = currentSVG;
+
+      // Scale SVG to fit
+      const svg = document.getElementById('preview').querySelector('svg');
+      if (svg) {
+        svg.style.width = '100%';
+        svg.style.height = '100%';
+      }
+    }
+
+    function copySVG() {
+      navigator.clipboard.writeText(currentSVG).then(() => {
+        alert('SVG copied to clipboard!');
+      });
+    }
+
+    function downloadSVG() {
+      const blob = new Blob([currentSVG], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `pattern-${document.getElementById('patternType').value}.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Update value displays
+    document.getElementById('size').addEventListener('input', (e) => {
+      document.getElementById('sizeValue').textContent = e.target.value;
+      updatePreview();
+    });
+
+    document.getElementById('opacity').addEventListener('input', (e) => {
+      document.getElementById('opacityValue').textContent = e.target.value;
+      updatePreview();
+    });
+
+    document.getElementById('patternType').addEventListener('change', updatePreview);
+    document.getElementById('color1').addEventListener('change', updatePreview);
+    document.getElementById('color2').addEventListener('change', updatePreview);
+
+    // Generate preview patterns for pattern cards
+    function generatePreviews() {
+      document.getElementById('preview-dots').innerHTML = generateDots(30, '#667eea', '#764ba2', 50);
+      document.getElementById('preview-lines').innerHTML = generateLines(30, '#667eea', '#764ba2', 50);
+      document.getElementById('preview-waves').innerHTML = generateWaves(30, '#667eea', '#764ba2', 50);
+      document.getElementById('preview-grid').innerHTML = generateGrid(30, '#667eea', '#764ba2', 50);
+      document.getElementById('preview-zigzag').innerHTML = generateZigzag(30, '#667eea', '#764ba2', 50);
+      document.getElementById('preview-hexagons').innerHTML = generateHexagons(30, '#667eea', '#764ba2', 50);
+    }
+
+    // Initialize
+    updatePreview();
+    generatePreviews();
+  </script>
+</body>
+</html>
