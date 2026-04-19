@@ -4,11 +4,12 @@
   "description": "Generate beautiful SVG background patterns for your web projects instantly",
   "price": "$19",
   "status": "ready",
-  "checkout_url": null,
+  "checkout_url": "https://profitbridge.lemonsqueezy.com/checkout/buy/placeholder-svg",
   "lemon_checkout_url": null,
-  "vercel_url": null,
+  "vercel_url": "https://svg-pattern-generator.vercel.app",
   "github_url": null,
   "deployment_url": null,
   "created_at": "2026-04-18T18:42:00Z",
-  "updated_at": "2026-04-18T18:42:00Z"
+  "updated_at": "2026-04-18T18:42:00Z",
+  "lemonsqueezy_checkout_url": "https://profitbridge.lemonsqueezy.com/checkout/buy/placeholder-svg"
 }
